@@ -39,5 +39,10 @@ pipeline {
                 '''
             }
         }
+        stage ("Call Terraform Build Job") {		
+            steps {
+                build job: 'terraform-ecs-downstream', parameters: [string(name: 'BUILD_VERSION', value: "${BUILD_NUMBER}")]
+            }
+        }
     }
 }
